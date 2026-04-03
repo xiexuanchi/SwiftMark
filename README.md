@@ -33,9 +33,9 @@ npm start
 
 笔记默认存储在以下路径：
 
-- **macOS**: `~/Library/Application Support/markdown_notebook/Notes`
-- **Windows**: `%APPDATA%/markdown_notebook/Notes`
-- **Linux**: `~/.config/markdown_notebook/Notes`
+- **macOS**: `~/Library/Application Support/SwiftMark/Notes`
+- **Windows**: `%APPDATA%/SwiftMark/Notes`
+- **Linux**: `~/.config/SwiftMark/Notes`
 
 ## 开源协议
 

@@ -29,8 +29,13 @@ window.addEventListener('DOMContentLoaded', async () => {
         ],
         outline: { enable: true, position: 'right' },
         after: async () => {
-            // 2. Always create a new note on startup to "open and record" immediately
-            await createNewNote();
+            // 2. Try to load last opened note, otherwise create a new one
+            const lastNotePath = await window.electronAPI.getLastNote();
+            if (lastNotePath) {
+                await openNote(lastNotePath);
+            } else {
+                await createNewNote();
+            }
             await refreshNoteList();
         }
     });
@@ -89,6 +94,8 @@ window.addEventListener('DOMContentLoaded', async () => {
             vditor.setValue(content);
             document.querySelector('h1').textContent = `SwiftMark - ${filePath.split('/').pop().replace('.md', '')}`;
             await refreshNoteList();
+            // Save as last opened note
+            await window.electronAPI.setLastNote(filePath);
         }
     }
 

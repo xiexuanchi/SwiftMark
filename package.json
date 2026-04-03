@@ -4,16 +4,55 @@
   "description": "This is a markdown notebook application built with Electron.",
   "main": "src/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder",
+    "build:mac": "electron-builder --mac",
+    "build:win": "electron-builder --win",
+    "build:linux": "electron-builder --linux"
   },
   "keywords": [],
   "author": "xiexuanchi",
   "license": "MIT",
   "type": "commonjs",
   "devDependencies": {
-    "electron": "^41.1.1"
+    "electron": "^41.1.1",
+    "electron-builder": "^26.8.1"
   },
   "dependencies": {
     "vditor": "^3.11.2"
+  },
+  "build": {
+    "appId": "com.example.swiftmark",
+    "productName": "SwiftMark",
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.productivity"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   }
 }

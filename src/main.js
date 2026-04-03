@@ -2,6 +2,11 @@ const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
+// Set application name to ensure user data folder is correct
+app.setName('SwiftMark');
+
+const configPath = path.join(app.getPath('userData'), 'config.json');
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 1200,
@@ -31,6 +36,42 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
+});
+
+// Config helpers
+const getConfig = () => {
+  if (fs.existsSync(configPath)) {
+    try {
+      return JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+    } catch (e) {
+      console.error('Error reading config:', e);
+    }
+  }
+  return {};
+};
+
+const saveConfig = (config) => {
+  try {
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf-8');
+  } catch (e) {
+    console.error('Error saving config:', e);
+  }
+};
+
+// IPC handlers for config
+ipcMain.handle('get-last-note', () => {
+  const config = getConfig();
+  const lastNotePath = config.lastNotePath;
+  if (lastNotePath && fs.existsSync(lastNotePath)) {
+    return lastNotePath;
+  }
+  return null;
+});
+
+ipcMain.handle('set-last-note', (event, filePath) => {
+  const config = getConfig();
+  config.lastNotePath = filePath;
+  saveConfig(config);
 });
 
 // IPC handlers for file operations
