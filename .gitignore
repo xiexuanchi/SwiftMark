@@ -2,3 +2,4 @@ node_modules/
 dist/
 *.exe
 .idea/
+.DS_Store

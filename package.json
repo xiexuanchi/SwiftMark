@@ -1,59 +1,19 @@
 {
-  "name": "obsidian-clone",
+  "name": "swiftmark",
   "version": "1.0.0",
-  "description": "一个仿照Obsidian的Markdown笔记软件，使用Electron开发",
-  "main": "main.js",
+  "description": "This is a markdown notebook application built with Electron.",
+  "main": "src/main.js",
   "scripts": {
-    "start": "electron .",
-    "dev": "electron .",
-    "build": "electron-builder",
-    "build:win": "electron-builder --win",
-    "dist": "electron-builder --publish=never"
+    "start": "electron ."
   },
-  "keywords": [
-    "electron",
-    "markdown",
-    "notes",
-    "obsidian"
-  ],
-  "author": "",
+  "keywords": [],
+  "author": "xiexuanchi",
   "license": "MIT",
-  "build": {
-    "appId": "com.obsidian-clone.app",
-    "productName": "Obsidian Clone",
-    "directories": {
-      "output": "dist"
-    },
-    "files": [
-      "**/*",
-      "!node_modules/**/*",
-      "node_modules/marked/**/*"
-    ],
-    "win": {
-      "target": [
-        {
-          "target": "nsis",
-          "arch": [
-            "x64"
-          ]
-        }
-      ],
-      "icon": "build/icon.ico",
-      "sign": false,
-      "signingHashAlgorithms": []
-    },
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true,
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true
-    }
-  },
+  "type": "commonjs",
   "devDependencies": {
-    "electron": "^39.2.7",
-    "electron-builder": "^24.13.3"
+    "electron": "^41.1.1"
   },
   "dependencies": {
-    "marked": "^17.0.1"
+    "vditor": "^3.11.2"
   }
 }
